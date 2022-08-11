@@ -36,6 +36,11 @@ public class WebSocketController {
     @PostMapping(value = "/notice")
     @ResponseBody
     public void notice(String id, String pwd) throws IOException {
+        // 默认值
+        if ("".equals(id) || id == null) {
+            id = "1";
+            pwd = password;
+        }
         // 密码校验一致（这里举例，实际开发还要有个密码加密的校验的），则进行群发
         if (password.equals(pwd)) {
             webSocketServer.broadCastInfo(id);
